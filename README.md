@@ -16,5 +16,7 @@ docker run -d -p 8082:8082 -p 9092:9092 --name h2 h2-server
 docker exec h2 java -cp /opt/h2.jar org.h2.tools.Shell -url jdbc:h2:/data/db1 -user sa -password pass -sql ""
 ```
 
-## Using the web console
-Open the url http://localhost:8082 in your browser
+## Connect to the database
+Open the url http://localhost:8082 in your browser to access the web console. The JDBC urls are:
+* Embedded: `jdbc:h2:/data/db1`
+* Server: `jdbc:h2:tcp://localhost:9092/db1`

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: h2
+  name: h2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: h2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: h2
+    spec:
+      containers:
+      - image: h2-server:2.1.214
+        name: h2-server
+        ports:
+        - containerPort: 9092
+        resources: {}
+        volumeMounts:
+          - name: h2-data
+            mountPath: /data
+      volumes:
+        - name: h2-data
+          persistentVolumeClaim:
+            claimName: h2-pvc
+

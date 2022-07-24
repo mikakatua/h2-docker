@@ -3,12 +3,12 @@ The container runs an H2 database in server mode.
 
 ## Build the container image
 ```
-docker build -t h2-server .
+docker build -t h2-server:2.1.214 .
 ```
 
 ## Run the H2 container
 ```
-docker run -d -p 8082:8082 -p 9092:9092 --name h2 h2-server
+docker run -d -p 8082:8082 -p 9092:9092 --name h2 h2-server:2.1.214
 ```
 
 ## Create a database
@@ -34,3 +34,9 @@ The Backup tool (`org.h2.tools.Backup`) can not be used to create a online backu
 
 > :warning: Creating a backup by copying the database files while the database is running is not supported, except if the file systems support creating snapshots. With other file systems, it can't be guaranteed that the data is copied in the right order.
 
+## Kubernetes deployment
+Deployment in a local cluster with [Kind](https://kind.sigs.k8s.io/)
+```
+kind load docker-image h2-server:2.1.214
+kubectl apply -f k8s
+```
